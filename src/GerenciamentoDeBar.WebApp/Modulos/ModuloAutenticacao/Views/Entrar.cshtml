@@ -1,0 +1,240 @@
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Entrar";
+}
+
+@model EntrarViewModel
+
+
+<style>
+    .auth-icon {
+        color: #D99A2B;
+        font-size: 3.5rem;
+    }
+
+    .auth-card {
+        border: none;
+        border-radius: 20px;
+    }
+
+    .auth-title {
+        color: #212529;
+    }
+
+    .auth-input {
+        border-radius: 12px;
+        padding: .75rem 1rem;
+    }
+
+    .auth-input:focus {
+        border-color: #D99A2B;
+        box-shadow: 0 0 0 .2rem rgba(217, 154, 43, .15);
+    }
+
+    .auth-label-icon {
+        color: #D99A2B;
+    }
+
+    .btn-bar {
+        background-color: #D99A2B;
+        border-color: #D99A2B;
+        color: white;
+    }
+
+    .btn-bar:hover {
+        background-color: #B77A16;
+        border-color: #B77A16;
+        color: white;
+    }
+
+    .auth-link {
+        color: #B77A16;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-link:hover {
+        color: #8f5f0f;
+        text-decoration: underline;
+    }
+</style>
+
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-5">
+
+
+            @* =====================================================
+               CABEÇALHO
+               ====================================================== *@
+
+            <div class="text-center mb-4">
+
+                <div class="mb-3">
+
+                    <i class="bi bi-cup-straw auth-icon"></i>
+
+                </div>
+
+
+                <h2 class="fw-bold auth-title">
+
+                    Acessar o Sistema
+
+                </h2>
+
+
+                <p class="text-muted">
+
+                    Entre para acessar o gerenciamento do seu bar.
+
+                </p>
+
+            </div>
+
+
+            @* =====================================================
+               FORMULÁRIO
+               ====================================================== *@
+
+            <form class="card auth-card shadow-sm p-4" asp-action="Entrar" method="post">
+
+
+                @* Erros gerais *@
+
+                <div asp-validation-summary="ModelOnly" class="text-danger small fw-semibold mb-3">
+                </div>
+
+
+                <input type="hidden" asp-for="ReturnUrl">
+
+
+                @* =================================================
+                   E-MAIL
+                   ================================================== *@
+
+                <div class="mb-4">
+
+                    <label asp-for="Email" class="form-label fw-semibold">
+
+                        <i class="bi bi-envelope me-1 auth-label-icon"></i>
+
+                        E-mail
+
+                    </label>
+
+
+                    <input asp-for="Email" type="email" class="form-control form-control-lg auth-input"
+                           placeholder="Digite seu e-mail" autocomplete="email" autofocus>
+
+
+                    <span asp-validation-for="Email" class="text-danger small fw-semibold">
+                    </span>
+
+                </div>
+
+
+                @* =================================================
+                   SENHA
+                   ================================================== *@
+
+                <div class="mb-3">
+
+                    <label asp-for="Senha" class="form-label fw-semibold">
+
+                        <i class="bi bi-lock me-1 auth-label-icon"></i>
+
+                        Senha
+
+                    </label>
+
+
+                    <input asp-for="Senha" type="password" class="form-control form-control-lg auth-input"
+                           placeholder="Digite sua senha" autocomplete="current-password">
+
+
+                    <span asp-validation-for="Senha" class="text-danger small fw-semibold">
+                    </span>
+
+                </div>
+
+
+                @* =================================================
+                   LEMBRAR-ME
+                   ================================================== *@
+
+                <div class="mb-4 form-check">
+
+                    <input asp-for="LembrarMe" type="checkbox" class="form-check-input">
+
+
+                    <label asp-for="LembrarMe" class="form-check-label text-muted">
+
+                        Lembrar-me
+
+                    </label>
+
+                </div>
+
+
+                @* =================================================
+                   BOTÃO
+                   ================================================== *@
+
+                <button class="btn btn-bar btn-lg rounded-pill w-100" type="submit">
+
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+
+                    Entrar
+
+                </button>
+
+
+                @* =================================================
+                   REGISTRO
+                   ================================================== *@
+
+                <div class="text-center mt-4">
+
+                    <span class="text-muted">
+
+                        Ainda não possui uma conta?
+
+                    </span>
+
+
+                    <a asp-controller="Autenticacao" asp-action="Registrar" class="auth-link ms-1">
+
+                        Criar conta
+
+                    </a>
+
+                </div>
+
+            </form>
+
+
+            @* =====================================================
+               INFORMAÇÃO
+               ====================================================== *@
+
+            <div class="text-center mt-4">
+
+                <small class="text-muted">
+
+                    <i class="bi bi-shield-check me-1" style="color: #D99A2B;"></i>
+
+                    Acesso seguro ao sistema de gerenciamento.
+
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

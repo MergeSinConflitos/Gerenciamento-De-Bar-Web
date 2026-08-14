@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GerenciamentoDeBar.Aplicacao/GerenciamentoDeBar.Aplicacao.csproj" />
+    <Project Path="src/GerenciamentoDeBar.Dominio/GerenciamentoDeBar.Dominio.csproj" />
+    <Project Path="src/GerenciamentoDeBar.Infra/GerenciamentoDeBar.Infra.csproj" />
+    <Project Path="src/GerenciamentoDeBar.WebApp/GerenciamentoDeBar.WebApp.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/GerenciamentoDeBar.Testes.E2E/GerenciamentoDeBar.Testes.E2E.csproj" />
+    <Project Path="test/GerenciamentoDeBar.Testes.Integraçao/GerenciamentoDeBar.Testes.Integraçao.csproj" />
+    <Project Path="test/GerenciamentoDeBar.Testes.Unidade/GerenciamentoDeBar.Testes.Unidade.csproj" />
+  </Folder>
+</Solution>
