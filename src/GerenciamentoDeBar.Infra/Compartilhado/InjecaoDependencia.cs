@@ -1,5 +1,7 @@
+using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
 using GerenciamentoDeBar.Infra.Compartilhado.Logging;
 using GerenciamentoDeBar.Infra.Compartilhado.Orm;
+using GerenciamentoDeBar.Infra.Modulos.ModuloMesa;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -65,7 +67,7 @@ public static class InjecaoDependencia
         .AddDefaultTokenProviders();
 
         // Use de exemplo a medida que cria os modulos 
-        // services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmOrm>();
+        services.AddScoped<IRepositorioMesa, RepositorioMesaEmOrm>();
 
 
     }

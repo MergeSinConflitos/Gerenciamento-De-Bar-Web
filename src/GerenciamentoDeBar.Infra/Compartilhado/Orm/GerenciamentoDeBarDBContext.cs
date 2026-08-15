@@ -1,6 +1,7 @@
 using System.Reflection;
 using GerenciamentoDeBar.Dominio.Compartilhado;
 using GerenciamentoDeBar.Dominio.Compartilhado.Identity;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloProprietario.cs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,11 +10,13 @@ using Microsoft.EntityFrameworkCore;
 namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
 {
     public sealed class GerenciamentoDeBarDbContext(
-      DbContextOptions<GerenciamentoDeBarDbContext> options,
+        DbContextOptions<GerenciamentoDeBarDbContext> options,
         IUserProvider? userProvider = null
     ) : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>(options)
     {
         public DbSet<Proprietario> proprietarios => Set<Proprietario>();
+
+        public DbSet<Mesa> mesas => Set<Mesa>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,16 +24,14 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
 
             Assembly assembly = typeof(GerenciamentoDeBarDbContext).Assembly;
 
-
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
-            // O EF faz cachê do OnModelCreating e variáveis locais não são atualizadas
+
+            // O EF faz cache do OnModelCreating e variáveis locais não são atualizadas.
             if (userProvider != null)
             {
-                //Use essa configuração  como exemplo a medida que for criando os modulos
-                /*
-                modelBuilder.Entity<Categoria>()
-                    .HasQueryFilter(c => c.UserId == userProvider.Id);
-                */
+                // Use essa configuração como exemplo à medida que for criando os módulos.
+                modelBuilder.Entity<Mesa>()
+                    .HasQueryFilter(m => m.UserId == userProvider.Id);
             }
         }
 
@@ -50,9 +51,11 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
                 switch (entry.State)
                 {
                     case EntityState.Added:
+
                         if (entry.Entity.UserId == Guid.Empty)
                         {
-                            entry.Property(nameof(IEntidadeUsuario.UserId)).CurrentValue = userId.Value;
+                            entry.Property(nameof(IEntidadeUsuario.UserId))
+                                .CurrentValue = userId.Value;
                         }
                         else if (entry.Entity.UserId != userId.Value)
                         {
@@ -64,6 +67,7 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
                         break;
 
                     case EntityState.Modified:
+
                         Guid idOriginalProprietario = entry
                             .Property(nameof(IEntidadeUsuario.UserId))
                             .OriginalValue is Guid idOriginal
@@ -72,15 +76,15 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
 
                         Guid idAtualProprietario = entry
                             .Property(nameof(IEntidadeUsuario.UserId))
-                            .OriginalValue is Guid idAtual
+                            .CurrentValue is Guid idAtual
                             ? idAtual
                             : Guid.Empty;
 
                         if (idOriginalProprietario != idAtualProprietario)
                         {
                             throw new UnauthorizedAccessException(
-                                  "Não é permitido alterar o proprietario de uma entidade."
-                              );
+                                "Não é permitido alterar o proprietario de uma entidade."
+                            );
                         }
 
                         if (idAtualProprietario != userId.Value)
@@ -93,6 +97,7 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
                         break;
 
                     case EntityState.Deleted:
+
                         Guid proprietarioOriginal = entry
                             .Property(nameof(IEntidadeUsuario.UserId))
                             .OriginalValue is Guid original
@@ -107,7 +112,6 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
                         }
 
                         break;
-
                 }
             }
 

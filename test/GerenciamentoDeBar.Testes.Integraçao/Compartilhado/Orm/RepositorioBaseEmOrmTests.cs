@@ -1,7 +1,9 @@
 using GerenciamentoDeBar.Infra.Compartilhado.Orm;
 using GerenciamentoDeBar.Testes.Integraçao.Compartilhado.Identity;
 using Microsoft.EntityFrameworkCore;
-// using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
+using GerenciamentoDeBar.Infra.Modulos.ModuloMesa;
+using FizzWare.NBuilder;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloConta;
@@ -25,13 +27,13 @@ public abstract class RepositorioBaseEmOrmTests
     // =========================================================
     // Habilitar conforme os módulos forem sendo implementados.
 
-    /*
+
     protected RepositorioMesaEmOrm repositorioMesa = null!;
-    protected RepositorioGarcomEmOrm repositorioGarcom = null!;
-    protected RepositorioProdutoEmOrm repositorioProduto = null!;
-    protected RepositorioContaEmOrm repositorioConta = null!;
-    protected RepositorioPedidoEmOrm repositorioPedido = null!;
-    */
+    //protected RepositorioGarcomEmOrm repositorioGarcom = null!;
+    //protected RepositorioProdutoEmOrm repositorioProduto = null!;
+    //protected RepositorioContaEmOrm repositorioConta = null!;
+    //protected RepositorioPedidoEmOrm repositorioPedido = null!;
+
 
 
     // =========================================================
@@ -49,7 +51,7 @@ public abstract class RepositorioBaseEmOrmTests
         // =====================================================
         // Habilitar quando o módulo Mesa estiver implementado.
 
-        /*
+
         repositorioMesa = new RepositorioMesaEmOrm(dbContext);
 
         BuilderSetup.SetCreatePersistenceMethod<Mesa>(
@@ -63,7 +65,7 @@ public abstract class RepositorioBaseEmOrmTests
                     repositorioMesa.Cadastrar(mesa);
             }
         );
-        */
+
 
 
         // =====================================================
