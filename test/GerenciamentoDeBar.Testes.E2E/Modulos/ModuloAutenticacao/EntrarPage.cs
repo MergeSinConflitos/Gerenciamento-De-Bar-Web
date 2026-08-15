@@ -65,6 +65,9 @@ public sealed class EntrarPage(
             }
         );
 
+    public ILocator MensagemDeErro() =>
+    page.GetByText("E-mail ou senha inválidos.");
+
     public async Task IrParaAsync()
     {
         await page.GotoAsync(Url);

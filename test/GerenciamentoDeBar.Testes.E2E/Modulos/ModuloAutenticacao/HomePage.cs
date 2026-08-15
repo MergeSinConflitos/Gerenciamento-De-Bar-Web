@@ -81,6 +81,9 @@ public sealed class HomePage(
             }
         );
 
+    public ILocator LinkModulo(string nome) =>
+page.Locator($"a:has([data-modulo='{nome}'])");
+
     public async Task IrParaAsync()
     {
         await page.GotoAsync(Url);
