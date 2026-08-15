@@ -159,6 +159,7 @@ public class RepositorioMesaEmOrmTests : RepositorioBaseEmOrmTests
         List<Mesa> mesas = new List<Mesa>([mesa, mesa2]);
         mesas = repositorioMesa.SelecionarTodos();
 
+        //Asserção
         Assert.HasCount(2, mesas);
     }
 }

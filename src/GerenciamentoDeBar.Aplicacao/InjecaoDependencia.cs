@@ -1,3 +1,4 @@
+using GerenciamentoDeBar.Aplicacao.Modulos.ModuloMesa;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,7 +12,7 @@ public static class InjecaoDependencia
     )
     {
         // Módulo de Mesas
-        // services.AddScoped<ServicoMesa>();
+        services.AddScoped<ServicoMesa>();
 
         // Módulo de Garçons
         // services.AddScoped<ServicoGarcom>();

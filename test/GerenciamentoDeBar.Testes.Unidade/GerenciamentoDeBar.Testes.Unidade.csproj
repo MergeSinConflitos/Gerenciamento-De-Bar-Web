@@ -12,6 +12,7 @@
     <PackageReference Include="PdfPig" Version="0.1.15" />
   </ItemGroup>
  <ItemGroup>
+   <ProjectReference Include="..\..\src\GerenciamentoDeBar.Aplicacao\GerenciamentoDeBar.Aplicacao.csproj" />
    <ProjectReference Include="..\..\src\GerenciamentoDeBar.Dominio\GerenciamentoDeBar.Dominio.csproj" />
  </ItemGroup>
 

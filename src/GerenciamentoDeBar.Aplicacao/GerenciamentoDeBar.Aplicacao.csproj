@@ -17,5 +17,9 @@
      <ProjectReference Include="..\GerenciamentoDeBar.Dominio\GerenciamentoDeBar.Dominio.csproj" />
    </ItemGroup>
 
+   <ItemGroup>
+     <Folder Include="Modulos\ModuloMesa\" />
+   </ItemGroup>
+
 
 </Project>
