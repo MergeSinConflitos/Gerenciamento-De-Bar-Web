@@ -6,6 +6,13 @@ using GerenciamentoDeBar.WebApp.Compartilhado;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//========================================================================================
+// LEMBRETES
+
+// * REVER MODULO DE MESA APÓS IMPLEMENTAÇÃO DO MODULO DE CONTA(DESENVOLVIMENTO E TESTES)
+
+//========================================================================================
+
 
 // =========================================================
 // CONFIGURAÇÃO DOS SERVIÇOS

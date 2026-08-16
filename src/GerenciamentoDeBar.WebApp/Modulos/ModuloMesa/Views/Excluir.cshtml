@@ -1,0 +1,303 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Excluir Mesa";
+}
+
+@model MesaViewModel.ExcluirMesaViewModel
+
+
+@{
+    bool mesaLivre = Model.StatusMesa == StatusMesa.Livre;
+
+    string corStatus = mesaLivre
+        ? "success"
+        : "danger";
+
+    string textoStatus = mesaLivre
+        ? "Livre"
+        : "Ocupada";
+
+    string iconeStatus = mesaLivre
+        ? "bi-check-circle-fill"
+        : "bi-person-fill";
+}
+
+
+<div class="container py-4">
+
+    @* =========================================================
+       CABEÇALHO
+       ========================================================= *@
+
+    <div class="mb-4">
+
+        <div class="d-flex align-items-center gap-2 mb-2">
+
+            <a asp-action="Listar" class="btn btn-outline-secondary btn-sm rounded-pill">
+
+                <i class="bi bi-arrow-left me-1"></i>
+
+                Voltar
+
+            </a>
+
+        </div>
+
+
+        <h3 class="fw-bold mb-1">
+
+            <i class="bi bi-trash3-fill me-2 text-danger"></i>
+
+            Excluir Mesa
+
+        </h3>
+
+
+        <p class="text-muted mb-0">
+
+            Confirme a exclusão da mesa selecionada.
+
+        </p>
+
+    </div>
+
+
+    @* =========================================================
+       CARD DE CONFIRMAÇÃO
+       ========================================================= *@
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-7 col-xl-6">
+
+            <div class="card border-0 shadow-sm excluir-card">
+
+                <div class="card-body p-4 p-md-5">
+
+
+                    @* =================================================
+                       AVISO
+                       ================================================= *@
+
+                    <div class="alert alert-danger
+                        border-start border-danger border-4
+                        rounded-3 mb-4">
+
+                        <div class="d-flex align-items-start gap-3">
+
+                            <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+
+                            <div>
+
+                                <strong>Atenção!</strong>
+
+                                <div class="small mt-1">
+
+                                    Esta ação não poderá ser desfeita.
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    @* =================================================
+                       IDENTIFICAÇÃO DA MESA
+                       ================================================= *@
+
+                    <div class="text-center mb-4">
+
+                        <div class="mesa-icon mx-auto mb-3">
+
+                            <i class="bi bi-grid-3x3-gap-fill"></i>
+
+                        </div>
+
+
+                        <span class="text-muted small">
+
+                            MESA
+
+                        </span>
+
+
+                        <h2 class="fw-bold mb-1">
+
+                            @Model.NumeroDaMesa
+
+                        </h2>
+
+
+                        <span class="badge
+                            text-bg-@corStatus
+                            rounded-pill px-3 py-2">
+
+                            <i class="bi @iconeStatus me-1"></i>
+
+                            @textoStatus
+
+                        </span>
+
+                    </div>
+
+
+                    @* =================================================
+                       DADOS DA MESA
+                       ================================================= *@
+
+                    <div class="border rounded-3 p-3 mb-4">
+
+                        <div class="d-flex
+                            justify-content-between
+                            align-items-center
+                            mb-3">
+
+                            <span class="text-secondary">
+
+                                <i class="bi bi-people-fill me-2"></i>
+
+                                Lugares
+
+                            </span>
+
+                            <strong>
+
+                                @Model.QuantidadeDeLugares
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="d-flex
+                            justify-content-between
+                            align-items-center">
+
+                            <span class="text-secondary">
+
+                                <i class="bi bi-circle-fill me-2
+                                text-@corStatus"></i>
+
+                                Status
+
+                            </span>
+
+                            <strong class="text-@corStatus">
+
+                                @textoStatus
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    @* =================================================
+                       CONFIRMAÇÃO
+                       ================================================= *@
+
+                    <p class="text-center text-muted mb-4">
+
+                        Tem certeza que deseja excluir esta mesa?
+
+                    </p>
+
+
+                    @* =================================================
+                       FORMULÁRIO
+                       ================================================= *@
+
+                    <form asp-action="Excluir" method="post">
+
+                        <input asp-for="Id" type="hidden" />
+
+
+                        <div class="d-flex
+                            flex-column flex-sm-row
+                            justify-content-center
+                            gap-2">
+
+                            <a asp-action="Listar" class="btn btn-outline-secondary
+                                rounded-pill px-4">
+
+                                <i class="bi bi-x-circle me-1"></i>
+
+                                Cancelar
+
+                            </a>
+
+
+                            <button type="submit" class="btn btn-danger
+                                rounded-pill px-4 fw-semibold">
+
+                                <i class="bi bi-trash3 me-1"></i>
+
+                                Sim, Excluir Mesa
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+    .excluir-card {
+
+        border-radius: 18px;
+
+        overflow: hidden;
+
+    }
+
+
+    .mesa-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background-color: rgba(217, 154, 43, .12);
+
+        color: #D99A2B;
+
+        font-size: 2rem;
+
+    }
+
+
+    .btn-danger {
+
+        transition: .25s ease;
+
+    }
+
+
+    .btn-danger:hover {
+
+        transform: translateY(-2px);
+
+    }
+</style>

@@ -23,5 +23,11 @@
     <ProjectReference Include="..\GerenciamentoDeBar.Infra\GerenciamentoDeBar.Infra.csproj" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <Folder Include="Modulos\ModuloMesa\" />
+    <Folder Include="Modulos\ModuloMesa\Views\" />
+  </ItemGroup>
+
 
 </Project>
