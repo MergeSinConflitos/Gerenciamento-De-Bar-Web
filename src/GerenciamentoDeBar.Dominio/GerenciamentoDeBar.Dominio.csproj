@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Modulos\ModuloGarcom\" />
     <Folder Include="Modulos\ModuloMesa\" />
+    <Folder Include="Modulos\ModuloProduto\" />
   </ItemGroup>
 
 </Project>
