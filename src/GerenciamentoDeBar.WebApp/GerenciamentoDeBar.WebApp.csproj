@@ -29,6 +29,8 @@
     <Folder Include="Modulos\ModuloGarcom\Views\" />
     <Folder Include="Modulos\ModuloMesa\" />
     <Folder Include="Modulos\ModuloMesa\Views\" />
+    <Folder Include="Modulos\ModuloProduto\" />
+    <Folder Include="Modulos\ModuloProduto\Views\" />
   </ItemGroup>
 
 

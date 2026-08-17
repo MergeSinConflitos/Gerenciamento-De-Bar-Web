@@ -23,6 +23,12 @@ public class ServicoProduto : ServicoBase<Produto>
 
     public Result Cadastrar(CadastrarProdutoDto dto)
     {
+        if (ExisteProdutoComNome(dto.Nome))
+            return Falha(
+                string.Empty,
+                "Já existe um produto com este nome."
+            );
+
         Produto novoProduto = new(
             dto.Nome,
             dto.Preco
@@ -41,6 +47,12 @@ public class ServicoProduto : ServicoBase<Produto>
 
     public Result Editar(EditarProdutoDto dto)
     {
+        if (ExisteProdutoComNome(dto.Nome, dto.Id))
+            return Falha(
+                string.Empty,
+                "Já existe um produto com este nome."
+            );
+
         Produto produtoAtualizado = new(
             dto.Nome,
             dto.Preco
@@ -155,6 +167,19 @@ public class ServicoProduto : ServicoBase<Produto>
             .ToList();
     }
     */
+
+    private bool ExisteProdutoComNome(string nome, Guid? idIgnorar = null)
+    {
+        return repositorioProduto
+            .SelecionarTodos()
+            .Any(p =>
+                p.Nome.Equals(
+                    nome,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && (idIgnorar == null || p.Id != idIgnorar)
+            );
+    }
 
     /*
     private bool PossuiItensPedidoAssociados(Guid produtoId)

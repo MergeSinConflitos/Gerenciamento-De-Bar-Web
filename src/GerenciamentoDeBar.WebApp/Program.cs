@@ -5,13 +5,14 @@ using GerenciamentoDeBar.WebApp.Compartilhado;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//========================================================================================
+//==================================================================================================
 // LEMBRETES
 
 // * REVER MODULO DE MESA APÓS IMPLEMENTAÇÃO DO MODULO DE CONTA(DESENVOLVIMENTO E TESTES)
-// * REVER MODULO DE GARÇOM APÓS IMPLEMENTAÇÃO DO MODULO DECONTA(DESENVOLVIMENTO E TESTES)
+// * REVER MODULO DE GARÇOM APÓS IMPLEMENTAÇÃO DO MODULO DE CONTA(DESENVOLVIMENTO E TESTES)
+// * REVER MODULO DE PRODUTO APÓS IMPLEMENTAÇÃO DO MODULO DE ITEMPEDIDO(DESENVOLVIMENTO E TESTES)
 
-//========================================================================================
+//===================================================================================================
 
 
 // =========================================================

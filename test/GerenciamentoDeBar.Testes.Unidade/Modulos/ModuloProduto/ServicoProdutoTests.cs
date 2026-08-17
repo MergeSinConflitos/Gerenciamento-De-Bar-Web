@@ -258,6 +258,47 @@ public class ServicoProdutoTests
         );
     }
 
+    [TestMethod]
+    public void Cadastrar_ComNomeDuplicado_NaoPersisteProduto()
+    {
+        // Arranjo
+        Mock<IRepositorioProduto> repositorioProduto = new();
+
+        Produto produtoExistente = new(
+            "Cerveja",
+            8.50m
+        );
+
+        repositorioProduto
+            .Setup(r => r.SelecionarTodos())
+            .Returns([produtoExistente]);
+
+        ServicoProduto servicoProduto = new(
+            repositorioProduto.Object
+        );
+
+        // Ação
+        Result resultado = servicoProduto.Cadastrar(
+            new CadastrarProdutoDto(
+                "Cerveja",
+                10.50m
+            )
+        );
+
+        // Asserção
+        Assert.IsTrue(resultado.IsFailed);
+
+        Assert.Contains(
+            "Já existe um produto com este nome.",
+            resultado.Errors.Single().Message
+        );
+
+        repositorioProduto.Verify(
+            r => r.Cadastrar(It.IsAny<Produto>()),
+            Times.Never
+        );
+    }
+
 
     // =========================================================
     // EDIÇÃO
@@ -275,6 +316,10 @@ public class ServicoProdutoTests
         Produto? produtoAtualizado = null;
 
         Mock<IRepositorioProduto> repositorioProduto = new();
+
+        repositorioProduto
+       .Setup(r => r.SelecionarTodos())
+       .Returns([]);
 
         repositorioProduto
             .Setup(r => r.Editar(
@@ -331,6 +376,10 @@ public class ServicoProdutoTests
         // Arranjo
         Mock<IRepositorioProduto> repositorioProduto = new();
 
+        repositorioProduto
+       .Setup(r => r.SelecionarTodos())
+       .Returns([]);
+
         ServicoProduto servicoProduto = new(
             repositorioProduto.Object
         );
@@ -369,6 +418,10 @@ public class ServicoProdutoTests
     {
         // Arranjo
         Mock<IRepositorioProduto> repositorioProduto = new();
+
+        repositorioProduto
+       .Setup(r => r.SelecionarTodos())
+       .Returns([]);
 
         ServicoProduto servicoProduto = new(
             repositorioProduto.Object
@@ -410,6 +463,10 @@ public class ServicoProdutoTests
         Mock<IRepositorioProduto> repositorioProduto = new();
 
         repositorioProduto
+       .Setup(r => r.SelecionarTodos())
+       .Returns([]);
+
+        repositorioProduto
             .Setup(r => r.Editar(
                 It.IsAny<Guid>(),
                 It.IsAny<Produto>()
@@ -440,6 +497,58 @@ public class ServicoProdutoTests
         );
     }
 
+    [TestMethod]
+    public void Editar_ComNomeDuplicado_NaoPersisteProduto()
+    {
+        // Arranjo
+        Mock<IRepositorioProduto> repositorioProduto = new();
+
+        Produto produtoExistente = new(
+            "Cerveja",
+            8.50m
+        );
+
+        Produto produtoParaEditar = new(
+            "Refrigerante",
+            6.50m
+        );
+
+        repositorioProduto
+            .Setup(r => r.SelecionarTodos())
+            .Returns([
+                produtoExistente,
+            produtoParaEditar
+            ]);
+
+        ServicoProduto servicoProduto = new(
+            repositorioProduto.Object
+        );
+
+        // Ação
+        Result resultado = servicoProduto.Editar(
+            new EditarProdutoDto(
+                produtoParaEditar.Id,
+                "Cerveja",
+                10.50m
+            )
+        );
+
+        // Asserção
+        Assert.IsTrue(resultado.IsFailed);
+
+        Assert.Contains(
+            "Já existe um produto com este nome.",
+            resultado.Errors.Single().Message
+        );
+
+        repositorioProduto.Verify(
+            r => r.Editar(
+                It.IsAny<Guid>(),
+                It.IsAny<Produto>()
+            ),
+            Times.Never
+        );
+    }
 
     // =========================================================
     // EXCLUSÃO
