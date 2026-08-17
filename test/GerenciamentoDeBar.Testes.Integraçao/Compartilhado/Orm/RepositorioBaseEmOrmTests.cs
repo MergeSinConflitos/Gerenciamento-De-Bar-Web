@@ -4,7 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
 using GerenciamentoDeBar.Infra.Modulos.ModuloMesa;
 using FizzWare.NBuilder;
-// using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
+using GerenciamentoDeBar.Infra.Modulos.ModuloGarcom;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloConta;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloPedido;
@@ -29,7 +30,7 @@ public abstract class RepositorioBaseEmOrmTests
 
 
     protected RepositorioMesaEmOrm repositorioMesa = null!;
-    //protected RepositorioGarcomEmOrm repositorioGarcom = null!;
+    protected RepositorioGarcomEmOrm repositorioGarcom = null!;
     //protected RepositorioProdutoEmOrm repositorioProduto = null!;
     //protected RepositorioContaEmOrm repositorioConta = null!;
     //protected RepositorioPedidoEmOrm repositorioPedido = null!;
@@ -73,7 +74,7 @@ public abstract class RepositorioBaseEmOrmTests
         // =====================================================
         // Habilitar quando o módulo Garcom estiver implementado.
 
-        /*
+
         repositorioGarcom = new RepositorioGarcomEmOrm(dbContext);
 
         BuilderSetup.SetCreatePersistenceMethod<Garcom>(
@@ -87,7 +88,7 @@ public abstract class RepositorioBaseEmOrmTests
                     repositorioGarcom.Cadastrar(garcom);
             }
         );
-        */
+
 
 
         // =====================================================

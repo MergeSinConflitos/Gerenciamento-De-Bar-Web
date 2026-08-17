@@ -1,6 +1,7 @@
 using System.Reflection;
 using GerenciamentoDeBar.Dominio.Compartilhado;
 using GerenciamentoDeBar.Dominio.Compartilhado.Identity;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloProprietario.cs;
 using Microsoft.AspNetCore.Identity;
@@ -15,8 +16,8 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
     ) : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid>(options)
     {
         public DbSet<Proprietario> proprietarios => Set<Proprietario>();
-
         public DbSet<Mesa> mesas => Set<Mesa>();
+        public DbSet<Garcom> garcoms => Set<Garcom>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +33,9 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
                 // Use essa configuração como exemplo à medida que for criando os módulos.
                 modelBuilder.Entity<Mesa>()
                     .HasQueryFilter(m => m.UserId == userProvider.Id);
+
+                modelBuilder.Entity<Garcom>()
+                    .HasQueryFilter(g => g.UserId == userProvider.Id);
             }
         }
 

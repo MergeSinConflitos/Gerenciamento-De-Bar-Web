@@ -26,6 +26,11 @@ public class Garcom : EntidadeBase<Garcom>
         Cpf = garcomAtualizado.Cpf;
     }
 
+    public Garcom()
+    {
+
+    }
+
     public override List<string> Validar()
     {
         List<string> erros = new List<string>();
