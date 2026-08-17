@@ -1,3 +1,4 @@
+using GerenciamentoDeBar.Aplicacao.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Aplicacao.Modulos.ModuloMesa;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,7 @@ public static class InjecaoDependencia
         services.AddScoped<ServicoMesa>();
 
         // Módulo de Garçons
-        // services.AddScoped<ServicoGarcom>();
+        services.AddScoped<ServicoGarcom>();
 
         // Módulo de Produtos
         // services.AddScoped<ServicoProduto>();
