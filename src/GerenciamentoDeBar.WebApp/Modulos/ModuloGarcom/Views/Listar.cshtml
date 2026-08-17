@@ -1,0 +1,449 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Listagem de Garçons";
+}
+
+@model List<GarcomViewModel.ListarGarconsViewModel>
+
+<div class="container py-4">
+
+    @* =========================================================
+       CABEÇALHO
+       ========================================================= *@
+
+    <div class="d-flex flex-column flex-md-row
+        justify-content-between
+        align-items-md-center
+        gap-3 mb-4">
+
+        <div>
+
+            <h3 class="fw-bold mb-1">
+
+                <i class="bi bi-person-badge-fill me-2" style="color: #D99A2B;"></i>
+
+                Garçons
+
+            </h3>
+
+        </div>
+
+
+        <a class="btn rounded-pill px-4 fw-semibold" style="background-color: #D99A2B; color: white;"
+           asp-action="Cadastrar" id="btn-cadastrar-garcom">
+
+            <i class="bi bi-plus-circle me-2"></i>
+
+            Cadastrar Novo Garçom
+
+        </a>
+
+    </div>
+
+
+    @* =========================================================
+       MENSAGEM DE ERRO
+       ========================================================= *@
+
+    @if (TempData["MensagemErro"] is string mensagemErro)
+    {
+        <div class="alert alert-danger
+            border-start border-danger border-4
+            rounded-3 shadow-sm" role="alert" id="mensagem-erro-garcom">
+
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+
+            @mensagemErro
+
+        </div>
+    }
+
+
+    @* =========================================================
+       FILTROS
+       ========================================================= *@
+
+    <div class="card border-0 shadow-sm rounded-4 mb-4">
+
+        <div class="card-body p-4">
+
+            <div class="d-flex align-items-center mb-3">
+
+                <div class="rounded-circle
+                    d-flex
+                    align-items-center
+                    justify-content-center
+                    me-3" style="width: 42px;
+                    height: 42px;
+                    background-color: rgba(217, 154, 43, .12);
+                    color: #D99A2B;">
+
+                    <i class="bi bi-search fs-5"></i>
+
+                </div>
+
+                <div>
+
+                    <h5 class="fw-bold mb-0">
+                        Pesquisar Garçons
+                    </h5>
+
+                    <small class="text-muted">
+                        Encontre um garçom pelo nome.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <form method="get" asp-action="Listar" id="form-filtro-garcom">
+
+                <div class="row g-3 align-items-end">
+
+                    @* =====================================================
+                       NOME
+                       ===================================================== *@
+
+                    <div class="col-md-8">
+
+                        <label for="nome" class="form-label fw-semibold">
+
+                            <i class="bi bi-person me-1"></i>
+
+                            Nome
+
+                        </label>
+
+                        <input type="text" id="nome" name="nome" class="form-control"
+                               placeholder="Digite o nome do garçom" />
+
+                    </div>
+
+
+                    @* =====================================================
+                       BOTÕES
+                       ===================================================== *@
+
+                    <div class="col-md-4">
+
+                        <div class="d-flex gap-2">
+
+                            <button type="submit" class="btn rounded-pill px-4 flex-grow-1 fw-semibold" style="background-color: #D99A2B;
+                                color: white;" id="btn-pesquisar-garcom">
+
+                                <i class="bi bi-search me-1"></i>
+
+                                Pesquisar
+
+                            </button>
+
+
+                            <a asp-action="Listar" class="btn btn-outline-secondary
+                                rounded-pill px-3" title="Limpar filtros" id="btn-limpar-filtro-garcom">
+
+                                <i class="bi bi-arrow-clockwise"></i>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    @* =========================================================
+       LEGENDA
+       ========================================================= *@
+
+    <div class="d-flex flex-wrap gap-3 mb-4">
+
+        <div class="d-flex align-items-center gap-2">
+
+            <span class="rounded-circle bg-primary" style="width: 12px; height: 12px;">
+            </span>
+
+            <span class="text-muted small">
+                Garçom cadastrado
+            </span>
+
+        </div>
+
+    </div>
+
+
+    @* =========================================================
+       LISTAGEM VAZIA
+       ========================================================= *@
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-primary
+            border-start border-primary border-4
+            rounded-3 shadow-sm" id="lista-garcons-vazia">
+
+            <i class="bi bi-info-circle-fill me-2"></i>
+
+            Nenhum garçom cadastrado.
+
+        </div>
+    }
+    else
+    {
+
+        @* =====================================================
+           CARDS
+           ===================================================== *@
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="lista-garcons">
+
+            @foreach (GarcomViewModel.ListarGarconsViewModel g in Model)
+            {
+
+                <div class="col">
+
+                    <div class="card h-100 border-0 shadow-sm garcom-card">
+
+                        @* INDICADOR LATERAL *@
+
+                        <div class="position-absolute top-0 start-0
+                            h-100 bg-primary" style="width: 5px;
+                            border-radius: 18px 0 0 18px;">
+                        </div>
+
+
+                        <div class="card-body p-4">
+
+                            @* =================================================
+                               CABEÇALHO DO CARD
+                               ================================================= *@
+
+                            <div class="d-flex
+                                justify-content-between
+                                align-items-start
+                                gap-3 mb-4">
+
+                                <div>
+
+                                    <span class="text-muted small">
+
+                                        <i class="bi bi-person-badge me-1"></i>
+
+                                        GARÇOM
+
+                                    </span>
+
+                                    <h4 class="fw-bold mb-0 mt-1 garcom-nome">
+
+                                        @g.Nome
+
+                                    </h4>
+
+                                </div>
+
+
+                                <span class="badge
+                                    text-bg-primary
+                                    rounded-pill px-3 py-2">
+
+                                    <i class="bi bi-person-check-fill me-1"></i>
+
+                                    Ativo
+
+                                </span>
+
+                            </div>
+
+
+                            @* =================================================
+                               INFORMAÇÕES
+                               ================================================= *@
+
+                            <div class="mb-4">
+
+                                <div class="d-flex
+                                    align-items-center
+                                    justify-content-between
+                                    mb-3">
+
+                                    <span class="text-secondary">
+
+                                        <i class="bi bi-telephone-fill me-2"></i>
+
+                                        Telefone
+
+                                    </span>
+
+                                    <strong class="garcom-telefone">
+
+                                        @g.Telefone
+
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="d-flex
+                                    align-items-center
+                                    justify-content-between">
+
+                                    <span class="text-secondary">
+
+                                        <i class="bi bi-person-vcard-fill me-2"></i>
+
+                                        CPF
+
+                                    </span>
+
+                                    <strong class="garcom-cpf">
+
+                                        @g.Cpf
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            @* =================================================
+                               IDENTIFICAÇÃO
+                               ================================================= *@
+
+                            <div class="border-top pt-3 mb-3">
+
+                                <small class="text-muted">
+                                    ID
+                                </small>
+
+                                <div class="text-muted
+                                    small
+                                    text-break
+                                    garcom-id">
+
+                                    @g.Id
+
+                                </div>
+
+                            </div>
+
+
+                            @* =================================================
+                               AÇÕES
+                               ================================================= *@
+
+                            <div class="d-flex
+                                flex-wrap
+                                gap-2
+                                justify-content-end">
+
+                                <a class="btn btn-outline-primary
+                                    btn-sm rounded-pill px-3 btn-editar-garcom" asp-action="Editar"
+                                   asp-route-id="@g.Id">
+
+                                    <i class="bi bi-pencil me-1"></i>
+
+                                    Editar
+
+                                </a>
+
+
+                                <a class="btn btn-outline-danger
+                                    btn-sm rounded-pill px-3 btn-excluir-garcom" asp-action="Excluir"
+                                   asp-route-id="@g.Id">
+
+                                    <i class="bi bi-trash me-1"></i>
+
+                                    Excluir
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    }
+
+</div>
+
+
+<style>
+    /* =========================================================
+       CARDS DE GARÇOM
+       ========================================================= */
+
+    .garcom-card {
+
+        border-radius: 18px;
+
+        overflow: hidden;
+
+        position: relative;
+
+        transition: .35s ease;
+
+        background-color: white;
+
+    }
+
+
+    .garcom-card:hover {
+
+        transform: translateY(-7px);
+
+        box-shadow:
+            0 1rem 2rem rgba(0, 0, 0, .14) !important;
+
+    }
+
+
+    /* =========================================================
+       BRILHO NO HOVER
+       ========================================================= */
+
+    .garcom-card::after {
+
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+
+        left: -120%;
+
+        width: 70%;
+
+        height: 100%;
+
+        background: linear-gradient(120deg,
+                transparent,
+                rgba(255, 255, 255, .5),
+                transparent);
+
+        transition: .8s;
+
+        pointer-events: none;
+
+    }
+
+
+    .garcom-card:hover::after {
+
+        left: 150%;
+
+    }
+</style>

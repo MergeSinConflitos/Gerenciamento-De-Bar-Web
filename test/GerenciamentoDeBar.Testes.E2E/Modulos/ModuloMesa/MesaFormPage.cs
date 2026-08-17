@@ -7,14 +7,37 @@ public class MesaFormPage
     private readonly IPage page;
     private readonly string urlBase;
 
+    public MesaFormPage(
+        IPage page,
+        string urlBase)
+    {
+        this.page = page;
+        this.urlBase = urlBase;
+    }
+
+
+    //=================================================
+    // URL
+    //=================================================
+
     public string Url =>
         $"{urlBase}/Mesa/Cadastrar";
+
+
+    //=================================================
+    // CAMPOS
+    //=================================================
 
     public ILocator NumeroDaMesa =>
         page.GetByLabel("Número da Mesa");
 
     public ILocator QuantidadeDeLugares =>
         page.GetByLabel("Quantidade de Lugares");
+
+
+    //=================================================
+    // BOTÕES
+    //=================================================
 
     public ILocator Confirmar =>
         page.GetByRole(
@@ -33,6 +56,11 @@ public class MesaFormPage
                 Name = "Voltar"
             }
         );
+
+
+    //=================================================
+    // VALIDAÇÕES
+    //=================================================
 
     public ILocator ErroNumeroDaMesa =>
         page.GetByText(
@@ -53,26 +81,28 @@ public class MesaFormPage
         );
 
     public ILocator ErroNumeroDaMesaDuplicado =>
-     page.GetByText(
-         "Já existe uma mesa com este número.",
-         new()
-         {
-             Exact = true
-         }
-     );
+        page.GetByText(
+            "Já existe uma mesa com este número.",
+            new()
+            {
+                Exact = true
+            }
+        );
 
-    public MesaFormPage(
-        IPage page,
-        string urlBase)
-    {
-        this.page = page;
-        this.urlBase = urlBase;
-    }
+
+    //=================================================
+    // NAVEGAÇÃO
+    //=================================================
 
     public async Task IrParaCadastroAsync()
     {
         await page.GotoAsync(Url);
     }
+
+
+    //=================================================
+    // PREENCHIMENTO
+    //=================================================
 
     public async Task PreencherAsync(
         int numeroDaMesa,
@@ -87,6 +117,11 @@ public class MesaFormPage
         );
     }
 
+
+    //=================================================
+    // AÇÕES
+    //=================================================
+
     public async Task ConfirmarAsync()
     {
         await Confirmar.ClickAsync();
@@ -96,6 +131,11 @@ public class MesaFormPage
     {
         await Voltar.ClickAsync();
     }
+
+
+    //=================================================
+    // VALIDAÇÃO NATIVA
+    //=================================================
 
     public async Task DesabilitarValidacaoNativaAsync()
     {

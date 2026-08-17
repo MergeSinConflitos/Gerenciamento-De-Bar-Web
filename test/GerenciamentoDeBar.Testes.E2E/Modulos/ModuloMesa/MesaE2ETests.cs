@@ -19,6 +19,10 @@ public sealed class MesaE2ETests : E2ETestsBase
     }
 
 
+    // =========================================================
+    // LISTAGEM
+    // =========================================================
+
     [TestMethod]
     public async Task Deve_ExibirPaginaDeListagem_DeMesas()
     {
@@ -39,6 +43,10 @@ public sealed class MesaE2ETests : E2ETestsBase
             .ToBeVisibleAsync();
     }
 
+
+    // =========================================================
+    // CADASTRO
+    // =========================================================
 
     [TestMethod]
     public async Task Deve_ExibirTelaDeCadastro_DeMesa()
@@ -106,6 +114,10 @@ public sealed class MesaE2ETests : E2ETestsBase
     }
 
 
+    // =========================================================
+    // VALIDAÇÃO - NÚMERO DA MESA
+    // =========================================================
+
     [TestMethod]
     public async Task NaoDeve_CadastrarMesa_ComNumeroZero()
     {
@@ -165,6 +177,10 @@ public sealed class MesaE2ETests : E2ETestsBase
             .ToHaveURLAsync(formPage.Url);
     }
 
+
+    // =========================================================
+    // VALIDAÇÃO - QUANTIDADE DE LUGARES
+    // =========================================================
 
     [TestMethod]
     public async Task NaoDeve_CadastrarMesa_ComQuantidadeDeLugaresMaiorQueDez()
@@ -226,6 +242,10 @@ public sealed class MesaE2ETests : E2ETestsBase
     }
 
 
+    // =========================================================
+    // NÚMERO DA MESA DUPLICADO
+    // =========================================================
+
     [TestMethod]
     public async Task NaoDeve_CadastrarMesa_ComNumeroDuplicado()
     {
@@ -265,6 +285,10 @@ public sealed class MesaE2ETests : E2ETestsBase
             .ToHaveURLAsync(formPage.Url);
     }
 
+
+    // =========================================================
+    // EDIÇÃO
+    // =========================================================
 
     [TestMethod]
     public async Task Deve_EditarMesa_ComDadosValidos()
@@ -321,6 +345,10 @@ public sealed class MesaE2ETests : E2ETestsBase
         ).ToBeVisibleAsync();
     }
 
+
+    // =========================================================
+    // EXCLUSÃO
+    // =========================================================
 
     [TestMethod]
     public async Task Deve_ExibirTelaDeExclusao_DeMesa()
@@ -416,6 +444,10 @@ public sealed class MesaE2ETests : E2ETestsBase
     }
 
 
+    // =========================================================
+    // PESQUISA POR NÚMERO
+    // =========================================================
+
     [TestMethod]
     public async Task Deve_PesquisarMesa_PorNumero()
     {
@@ -453,6 +485,10 @@ public sealed class MesaE2ETests : E2ETestsBase
         ).ToBeVisibleAsync();
     }
 
+
+    // =========================================================
+    // PESQUISA POR STATUS
+    // =========================================================
 
     [TestMethod]
     public async Task Deve_PesquisarMesa_PorStatusLivre()

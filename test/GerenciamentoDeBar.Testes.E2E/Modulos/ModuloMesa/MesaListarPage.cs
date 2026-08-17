@@ -15,6 +15,11 @@ public class MesaListarPage
 
     public string Url => $"{urlBase}/Mesa/Listar";
 
+
+    //=================================================
+    // CABEÇALHO
+    //=================================================
+
     public ILocator Titulo =>
         page.GetByRole(
             AriaRole.Heading,
@@ -27,11 +32,22 @@ public class MesaListarPage
     public ILocator CadastrarNovo =>
         page.GetByText("Cadastrar Nova Mesa");
 
+
+    //=================================================
+    // MENSAGENS
+    //=================================================
+
     public ILocator EstadoVazio =>
         page.GetByText("Nenhuma mesa cadastrada.");
 
     public ILocator MensagemErro =>
         page.Locator(".alert-danger");
+
+
+    //=================================================
+    // FILTROS
+    //=================================================
+
     public ILocator NumeroDaMesa(int numero)
     {
         return page.GetByText(
@@ -43,22 +59,33 @@ public class MesaListarPage
         );
     }
 
-    public ILocator StatusDaMesa(int numeroDaMesa, string status)
+    public ILocator StatusDaMesa(
+        int numeroDaMesa,
+        string status)
     {
-        ILocator mesa = NumeroDaMesa(numeroDaMesa);
+        ILocator mesa =
+            NumeroDaMesa(numeroDaMesa);
 
-        ILocator card = mesa.Locator(
-            "xpath=ancestor::div[contains(@class,'card')][1]"
-        );
+        ILocator card =
+            mesa.Locator(
+                "xpath=ancestor::div[contains(@class,'card')][1]"
+            );
 
-        return card.Locator(".badge").GetByText(
-            status,
-            new()
-            {
-                Exact = true
-            }
-        );
+        return card
+            .Locator(".badge")
+            .GetByText(
+                status,
+                new()
+                {
+                    Exact = true
+                }
+            );
     }
+
+
+    //=================================================
+    // NAVEGAÇÃO
+    //=================================================
 
     public async Task IrParaAsync()
     {
@@ -70,13 +97,20 @@ public class MesaListarPage
         await CadastrarNovo.ClickAsync();
     }
 
+
+    //=================================================
+    // AÇÕES
+    //=================================================
+
     public async Task EditarAsync(int numero)
     {
-        ILocator mesa = NumeroDaMesa(numero);
+        ILocator mesa =
+            NumeroDaMesa(numero);
 
-        ILocator card = mesa.Locator(
-            "xpath=ancestor::div[contains(@class,'card')][1]"
-        );
+        ILocator card =
+            mesa.Locator(
+                "xpath=ancestor::div[contains(@class,'card')][1]"
+            );
 
         await card.GetByRole(
             AriaRole.Link,
@@ -89,11 +123,13 @@ public class MesaListarPage
 
     public async Task ExcluirAsync(int numero)
     {
-        ILocator mesa = NumeroDaMesa(numero);
+        ILocator mesa =
+            NumeroDaMesa(numero);
 
-        ILocator card = mesa.Locator(
-            "xpath=ancestor::div[contains(@class,'card')][1]"
-        );
+        ILocator card =
+            mesa.Locator(
+                "xpath=ancestor::div[contains(@class,'card')][1]"
+            );
 
         await card.GetByRole(
             AriaRole.Link,
@@ -103,6 +139,11 @@ public class MesaListarPage
             }
         ).ClickAsync();
     }
+
+
+    //=================================================
+    // PESQUISA
+    //=================================================
 
     public async Task PesquisarPorNumeroAsync(int numero)
     {
