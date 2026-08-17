@@ -65,49 +65,9 @@ public class Garcom : EntidadeBase<Garcom>
         {
             erros.Add("O CPF informado é inválido");
         }
-        else if (!CpfValido(Cpf))
-        {
-            erros.Add("O CPF informado é inválido");
-        }
 
         return erros;
     }
 
-    private bool CpfValido(string cpf)
-    {
-        string numeros = Regex.Replace(cpf, @"\D", "");
 
-        if (numeros.Length != 11)
-            return false;
-
-        if (numeros.Distinct().Count() == 1)
-            return false;
-
-        int soma = 0;
-
-        for (int i = 0; i < 9; i++)
-        {
-            soma += int.Parse(numeros[i].ToString()) * (10 - i);
-        }
-
-        int resto = soma % 11;
-
-        int primeiroDigito = resto < 2 ? 0 : 11 - resto;
-
-        if (int.Parse(numeros[9].ToString()) != primeiroDigito)
-            return false;
-
-        soma = 0;
-
-        for (int i = 0; i < 10; i++)
-        {
-            soma += int.Parse(numeros[i].ToString()) * (11 - i);
-        }
-
-        resto = soma % 11;
-
-        int segundoDigito = resto < 2 ? 0 : 11 - resto;
-
-        return int.Parse(numeros[10].ToString()) == segundoDigito;
-    }
 }

@@ -323,13 +323,8 @@
                                     ID
                                 </small>
 
-                                <div class="text-muted
-                                    small
-                                    text-break
-                                    garcom-id">
-
-                                    @g.Id
-
+                                <div class="garcom-id text-muted small text-break" data-id="@g.Id">
+                                    @g.Id.ToString().Substring(0, 8)
                                 </div>
 
                             </div>

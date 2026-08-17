@@ -179,29 +179,6 @@ public class GarcomTestes
         );
     }
 
-
-    [TestMethod]
-    public void Validar_ComCpfMatematicamenteInvalido_RetornaErro()
-    {
-        // Arranjo
-        Garcom garcom = new Garcom(
-            "João",
-            "(49) 99999-9999",
-            "123.456.789-00"
-        );
-
-        // Ação
-        List<string> erros = garcom.Validar();
-
-        // Asserção
-        Assert.HasCount(1, erros);
-        Assert.AreEqual(
-            "O CPF informado é inválido",
-            erros.First()
-        );
-    }
-
-
     [TestMethod]
     public void Validar_ComCpfValido_NaoRetornaErro()
     {

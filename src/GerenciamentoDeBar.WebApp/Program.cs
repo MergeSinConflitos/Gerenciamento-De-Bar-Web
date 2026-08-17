@@ -1,6 +1,5 @@
 
 using GerenciamentoDeBar.Aplicacao;
-using GerenciamentoDeBar.Aplicacao.Compartilhado;
 using GerenciamentoDeBar.Infra.Compartilhado;
 using GerenciamentoDeBar.WebApp.Compartilhado;
 

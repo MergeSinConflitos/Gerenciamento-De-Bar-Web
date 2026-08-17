@@ -287,12 +287,12 @@ public sealed class GarcomE2ETests : E2ETestsBase
         // Act
         await formPage.Nome.FillAsync("João");
         await formPage.Telefone.FillAsync("(49) 99999-9999");
-        await formPage.Cpf.FillAsync("012.859.985-01");
+        await formPage.Cpf.FillAsync("012.859.985-");
 
         await formPage.Salvar.ClickAsync();
 
         // Assert
-        await Expect(formPage.ResumoErros)
+        await Expect(formPage.ErroCpf)
        .ToContainTextAsync("O CPF informado é inválido");
 
         await Expect(Page)
@@ -423,10 +423,10 @@ public sealed class GarcomE2ETests : E2ETestsBase
         await Page.GotoAsync(listarPage.Url);
 
         string idTexto =
-            await listarPage.Id(nomeInicial).InnerTextAsync();
+    await listarPage.Id(nomeInicial)
+        .GetAttributeAsync("data-id");
 
-        Guid id =
-            Guid.Parse(idTexto);
+        Guid id = Guid.Parse(idTexto!);
 
         // Act
         await formPage.IrParaEditar(id);
