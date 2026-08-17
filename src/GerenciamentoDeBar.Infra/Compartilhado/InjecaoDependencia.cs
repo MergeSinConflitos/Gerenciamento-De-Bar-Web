@@ -1,9 +1,11 @@
 using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 using GerenciamentoDeBar.Infra.Compartilhado.Logging;
 using GerenciamentoDeBar.Infra.Compartilhado.Orm;
 using GerenciamentoDeBar.Infra.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Infra.Modulos.ModuloMesa;
+using GerenciamentoDeBar.Infra.Modulos.ModuloProduto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -71,6 +73,7 @@ public static class InjecaoDependencia
         // Use de exemplo a medida que cria os modulos 
         services.AddScoped<IRepositorioMesa, RepositorioMesaEmOrm>();
         services.AddScoped<IRepositorioGarcom, RepositorioGarcomEmOrm>();
+        services.AddScoped<IRepositorioProduto, RepositorioProdutoEmOrm>();
 
 
     }

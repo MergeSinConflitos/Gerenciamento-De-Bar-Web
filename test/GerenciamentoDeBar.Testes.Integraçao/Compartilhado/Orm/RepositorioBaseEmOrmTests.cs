@@ -6,6 +6,8 @@ using GerenciamentoDeBar.Infra.Modulos.ModuloMesa;
 using FizzWare.NBuilder;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Infra.Modulos.ModuloGarcom;
+using GerenciamentoDeBar.Infra.Modulos.ModuloProduto;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloConta;
 // using GerenciamentoDeBar.Dominio.Modulos.ModuloPedido;
@@ -31,7 +33,7 @@ public abstract class RepositorioBaseEmOrmTests
 
     protected RepositorioMesaEmOrm repositorioMesa = null!;
     protected RepositorioGarcomEmOrm repositorioGarcom = null!;
-    //protected RepositorioProdutoEmOrm repositorioProduto = null!;
+    protected RepositorioProdutoEmOrm repositorioProduto = null!;
     //protected RepositorioContaEmOrm repositorioConta = null!;
     //protected RepositorioPedidoEmOrm repositorioPedido = null!;
 
@@ -96,7 +98,7 @@ public abstract class RepositorioBaseEmOrmTests
         // =====================================================
         // Habilitar quando o módulo Produto estiver implementado.
 
-        /*
+
         repositorioProduto = new RepositorioProdutoEmOrm(dbContext);
 
         BuilderSetup.SetCreatePersistenceMethod<Produto>(
@@ -110,7 +112,7 @@ public abstract class RepositorioBaseEmOrmTests
                     repositorioProduto.Cadastrar(produto);
             }
         );
-        */
+
 
 
         // =====================================================

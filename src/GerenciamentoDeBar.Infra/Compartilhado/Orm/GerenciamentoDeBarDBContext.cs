@@ -3,6 +3,7 @@ using GerenciamentoDeBar.Dominio.Compartilhado;
 using GerenciamentoDeBar.Dominio.Compartilhado.Identity;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloGarcom;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloMesa;
+using GerenciamentoDeBar.Dominio.Modulos.ModuloProduto;
 using GerenciamentoDeBar.Dominio.Modulos.ModuloProprietario.cs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
         public DbSet<Proprietario> proprietarios => Set<Proprietario>();
         public DbSet<Mesa> mesas => Set<Mesa>();
         public DbSet<Garcom> garcoms => Set<Garcom>();
+        public DbSet<Produto> produtos => Set<Produto>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +38,9 @@ namespace GerenciamentoDeBar.Infra.Compartilhado.Orm
 
                 modelBuilder.Entity<Garcom>()
                     .HasQueryFilter(g => g.UserId == userProvider.Id);
+
+                modelBuilder.Entity<Produto>()
+                    .HasQueryFilter(p => p.UserId == userProvider.Id);
             }
         }
 
